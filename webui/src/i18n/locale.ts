@@ -1,21 +1,25 @@
-export type AppLocale = "zh-CN" | "en-US";
+export type AppLocale = "zh-CN" | "en-US" | "vi-VN";
 
 export const STORAGE_KEY = "resin.webui.locale";
 export const DEFAULT_LOCALE: AppLocale = "zh-CN";
-export const SUPPORTED_LOCALES: readonly AppLocale[] = ["zh-CN", "en-US"];
+export const SUPPORTED_LOCALES: readonly AppLocale[] = ["zh-CN", "en-US", "vi-VN"];
 
 let currentLocale: AppLocale = DEFAULT_LOCALE;
 
 function isLocale(value: unknown): value is AppLocale {
-  return value === "zh-CN" || value === "en-US";
+  return value === "zh-CN" || value === "en-US" || value === "vi-VN";
 }
 
 export function normalizeLocale(value: string | null | undefined): AppLocale {
   if (value && isLocale(value)) {
     return value;
   }
-  if (value?.toLowerCase().startsWith("zh")) {
+  const normalized = value?.toLowerCase() ?? "";
+  if (normalized.startsWith("zh")) {
     return "zh-CN";
+  }
+  if (normalized.startsWith("vi")) {
+    return "vi-VN";
   }
   return "en-US";
 }
@@ -50,4 +54,8 @@ export function setCurrentLocale(locale: AppLocale) {
 
 export function isEnglishLocale(locale: AppLocale): boolean {
   return locale === "en-US";
+}
+
+export function isVietnameseLocale(locale: AppLocale): boolean {
+  return locale === "vi-VN";
 }

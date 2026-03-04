@@ -7,7 +7,7 @@ import {
   persistLocale,
   setCurrentLocale,
 } from "./locale";
-import { buildZhTranslations, EN_TRANSLATIONS, translateDocumentTitle } from "./translations";
+import { buildViTranslations, buildZhTranslations, EN_TRANSLATIONS, translateDocumentTitle } from "./translations";
 
 const initialLocale = detectInitialLocale();
 setCurrentLocale(initialLocale);
@@ -15,13 +15,16 @@ setCurrentLocale(initialLocale);
 void i18next.use(initReactI18next).init({
   lng: initialLocale,
   fallbackLng: DEFAULT_LOCALE,
-  supportedLngs: ["zh-CN", "en-US"],
+  supportedLngs: ["zh-CN", "en-US", "vi-VN"],
   resources: {
     "zh-CN": {
       translation: buildZhTranslations(),
     },
     "en-US": {
       translation: EN_TRANSLATIONS as Record<string, string>,
+    },
+    "vi-VN": {
+      translation: buildViTranslations(),
     },
   },
   interpolation: {

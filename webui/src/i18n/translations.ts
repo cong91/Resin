@@ -2,6 +2,7 @@ import type { AppLocale } from "./locale";
 
 export const APP_TITLE_ZH = "Resin · 高性能粘性代理池";
 const APP_TITLE_EN = "Resin · Sticky Proxy Pool";
+const APP_TITLE_VI = "Resin · Cụm proxy sticky hiệu năng cao";
 
 const EXACT_ZH_TO_EN: Record<string, string> = {
   "Resin · 高性能粘性代理池": APP_TITLE_EN,
@@ -617,8 +618,103 @@ const EXACT_ZH_TO_EN: Record<string, string> = {
   "配置已更新（{{count}} 项变更）": "Config updated ({{count}} changes)",
 };
 
+const EXACT_ZH_TO_VI: Record<string, string> = {
+  "Resin · 高性能粘性代理池": APP_TITLE_VI,
+  "高性能粘性代理池 · 管理面板": "Cụm proxy sticky hiệu năng cao · Bảng điều khiển",
+  "主导航": "Điều hướng chính",
+  "切换语言": "Đổi ngôn ngữ",
+  "安全警告": "Cảnh báo bảo mật",
+  "退出登录": "Đăng xuất",
+  "当前为免认证访问模式": "Đang chạy ở chế độ không xác thực",
+  "总览看板": "Tổng quan",
+  "平台管理": "Quản lý nền tảng",
+  "订阅管理": "Quản lý subscription",
+  "节点池": "Pool node",
+  "请求头规则": "Quy tắc header request",
+  "请求日志": "Nhật ký request",
+  "资源": "Tài nguyên",
+  "系统配置": "Cấu hình hệ thống",
+  "刷新": "Làm mới",
+  "重置": "Đặt lại",
+  "查询": "Tra cứu",
+  "正在加载日志...": "Đang tải nhật ký...",
+  "没有匹配日志": "Không có nhật ký phù hợp",
+  "开始时间": "Thời gian bắt đầu",
+  "结束时间": "Thời gian kết thúc",
+  "平台": "Nền tảng",
+  "账号": "Tài khoản",
+  "目标主机": "Host đích",
+  "代理类型": "Loại proxy",
+  "全部": "Tất cả",
+  "正向代理": "Proxy thuận",
+  "反向代理": "Proxy ngược",
+  "出口 IP": "IP thoát",
+  "网络状态": "Trạng thái mạng",
+  "成功": "Thành công",
+  "失败": "Thất bại",
+  "HTTP 状态": "Trạng thái HTTP",
+  "时间范围错误：开始时间必须早于结束时间，已暂不应用结束时间筛选。":
+    "Khoảng thời gian không hợp lệ: thời gian bắt đầu phải sớm hơn thời gian kết thúc; tạm thời bỏ qua bộ lọc thời gian kết thúc.",
+  "HTTP 状态码需为 100-599 的整数，当前输入暂不应用。":
+    "Mã trạng thái HTTP phải là số nguyên trong khoảng 100-599; giá trị hiện tại tạm thời không được áp dụng.",
+  "时间": "Thời gian",
+  "代理": "Proxy",
+  "正向": "Thuận",
+  "反向": "Ngược",
+  "平台 / 账号": "Nền tảng / Tài khoản",
+  "目标": "Mục tiêu",
+  "网络": "Mạng",
+  "耗时": "Độ trễ",
+  "流量": "Lưu lượng",
+  "节点": "Node",
+  "在节点池搜索 {{tag}}": "Tìm {{tag}} trong pool node",
+  "请求日志详情": "Chi tiết nhật ký request",
+  "关闭详情面板": "Đóng bảng chi tiết",
+  "日志摘要": "Tóm tắt nhật ký",
+  "请求时间、协议结果与平台路由信息。": "Thời gian request, kết quả giao thức và thông tin định tuyến nền tảng.",
+  "诊断": "Chẩn đoán",
+  "异常排查与连接状态分析。": "Phân tích sự cố và trạng thái kết nối.",
+  "Resin 错误:": "Lỗi Resin:",
+  "失败阶段:": "Giai đoạn lỗi:",
+  "错误类型:": "Loại lỗi:",
+  "错误详情:": "Chi tiết lỗi:",
+  "当前请求未产生异常诊断信息": "Request hiện tại không phát sinh thông tin chẩn đoán bất thường",
+  "目标与节点": "Mục tiêu và node",
+  "请求目标与命中节点信息。": "Thông tin mục tiêu request và node khớp.",
+  "目标地址": "Địa chỉ đích",
+  "报文内容": "Nội dung gói tin",
+  "查看请求/响应内容。": "Xem nội dung request/response.",
+  "该条日志未记录报文内容。": "Bản ghi này không lưu nội dung gói tin.",
+  "请求": "Request",
+  "响应": "Response",
+  "已截断": "Đã cắt",
+  "加载报文内容中...": "Đang tải nội dung gói tin...",
+  "（空 Headers）": "(Headers rỗng)",
+  "（空 Body）": "(Body rỗng)",
+  "数据库状态": "Trạng thái cơ sở dữ liệu",
+  "数据库更新时间": "Thời điểm cập nhật cơ sở dữ liệu",
+  "下次计划更新": "Lần cập nhật theo lịch tiếp theo",
+  "数据库已加载": "Đã nạp cơ sở dữ liệu",
+  "数据库未加载": "Chưa nạp cơ sở dữ liệu",
+  "立即更新": "Cập nhật ngay",
+  "更新中...": "Đang cập nhật...",
+  "单 IP 查询": "Tra cứu IP đơn",
+  "输入 IP 后点击查询。": "Nhập IP rồi bấm tra cứu.",
+  "输入 IP 地址例如 8.8.8.8": "Nhập địa chỉ IP, ví dụ 8.8.8.8",
+  "区域": "Khu vực",
+  "输入 IP 执行查询": "Nhập IP để tra cứu",
+  "可查看数据库状态并进行 IP 查询。": "Có thể xem trạng thái cơ sở dữ liệu và tra cứu IP.",
+  "查询 IP 所在地区，并维护 GeoIP 数据库。": "Tra cứu khu vực của IP và bảo trì cơ sở dữ liệu GeoIP.",
+  "当前加载时间与下一次计划更新时间": "Thời điểm nạp hiện tại và thời gian cập nhật theo lịch tiếp theo",
+  "GeoIP 数据库更新任务已执行": "Đã chạy tác vụ cập nhật cơ sở dữ liệu GeoIP",
+  "未知错误": "Lỗi không xác định",
+  "中文": "中文",
+};
+
 export function translateDocumentTitle(locale: AppLocale): string {
-  return locale === "en-US" ? APP_TITLE_EN : APP_TITLE_ZH;
+  if (locale === "en-US") return APP_TITLE_EN;
+  if (locale === "vi-VN") return APP_TITLE_VI;
+  return APP_TITLE_ZH;
 }
 
 export const EN_TRANSLATIONS: Readonly<Record<string, string>> = EXACT_ZH_TO_EN;
@@ -627,6 +723,17 @@ export function buildZhTranslations(): Record<string, string> {
   const map: Record<string, string> = {};
   for (const key of Object.keys(EXACT_ZH_TO_EN)) {
     map[key] = key;
+  }
+  return map;
+}
+
+export function buildViTranslations(): Record<string, string> {
+  const map: Record<string, string> = {};
+  for (const [key, value] of Object.entries(EXACT_ZH_TO_EN)) {
+    map[key] = value;
+  }
+  for (const [key, value] of Object.entries(EXACT_ZH_TO_VI)) {
+    map[key] = value;
   }
   return map;
 }

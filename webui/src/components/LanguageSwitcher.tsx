@@ -11,7 +11,8 @@ export function LanguageSwitcher({ className, compact = false }: LanguageSwitche
   const { locale, setLocale, t } = useI18n();
 
   if (compact) {
-    const nextLocale = locale === "zh-CN" ? "en-US" : "zh-CN";
+    const nextLocale = locale === "zh-CN" ? "en-US" : locale === "en-US" ? "vi-VN" : "zh-CN";
+    const compactLabel = locale === "zh-CN" ? "中" : locale === "vi-VN" ? "VI" : "EN";
     return (
       <button
         type="button"
@@ -21,7 +22,7 @@ export function LanguageSwitcher({ className, compact = false }: LanguageSwitche
         title={t("切换语言")}
       >
         <Languages size={14} />
-        <span>{locale === "zh-CN" ? "中" : "EN"}</span>
+        <span>{compactLabel}</span>
       </button>
     );
   }
@@ -43,6 +44,14 @@ export function LanguageSwitcher({ className, compact = false }: LanguageSwitche
         title="English"
       >
         EN
+      </button>
+      <button
+        type="button"
+        className={cn("locale-switch-btn", locale === "vi-VN" && "locale-switch-btn-active")}
+        onClick={() => setLocale("vi-VN")}
+        title="Tiếng Việt"
+      >
+        VI
       </button>
     </div>
   );
