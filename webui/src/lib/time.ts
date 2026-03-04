@@ -1,7 +1,10 @@
-import { getCurrentLocale, isEnglishLocale } from "../i18n/locale";
+import { getCurrentLocale, isEnglishLocale, isVietnameseLocale } from "../i18n/locale";
 
-function isEnglish(): boolean {
-  return isEnglishLocale(getCurrentLocale());
+function getLocaleMode(): "en" | "vi" | "zh" {
+  const locale = getCurrentLocale();
+  if (isEnglishLocale(locale)) return "en";
+  if (isVietnameseLocale(locale)) return "vi";
+  return "zh";
 }
 
 export function formatDateTime(input: string): string {
@@ -14,7 +17,8 @@ export function formatDateTime(input: string): string {
     return input;
   }
 
-  const locale = isEnglish() ? "en-US" : "zh-CN";
+  const mode = getLocaleMode();
+  const locale = mode === "en" ? "en-US" : mode === "vi" ? "vi-VN" : "zh-CN";
 
   return new Intl.DateTimeFormat(locale, {
     year: "numeric",
@@ -28,7 +32,8 @@ export function formatDateTime(input: string): string {
 }
 
 export function formatGoDuration(input: string, emptyLabel = "-"): string {
-  const english = isEnglish();
+  const mode = getLocaleMode();
+  const english = mode === "en";
   const raw = input.trim();
   if (!raw) {
     return emptyLabel;
@@ -61,7 +66,9 @@ export function formatGoDuration(input: string, emptyLabel = "-"): string {
 
   const wholeSeconds = Math.floor(totalSeconds);
   if (wholeSeconds <= 0) {
-    return english ? "0s" : "0 秒";
+    if (mode === "en") return "0s";
+    if (mode === "vi") return "0 giây";
+    return "0 秒";
   }
 
   const days = Math.floor(wholeSeconds / 86_400);
@@ -86,6 +93,22 @@ export function formatGoDuration(input: string, emptyLabel = "-"): string {
     return parts.slice(0, 2).join(" ");
   }
 
+  if (mode === "vi") {
+    if (days > 0) {
+      parts.push(`${days} ngày`);
+    }
+    if (hours > 0) {
+      parts.push(`${hours} giờ`);
+    }
+    if (days === 0 && minutes > 0) {
+      parts.push(`${minutes} phút`);
+    }
+    if (days === 0 && hours === 0 && seconds > 0) {
+      parts.push(`${seconds} giây`);
+    }
+    return parts.slice(0, 2).join(" ");
+  }
+
   if (days > 0) {
     parts.push(`${days} 天`);
   }
@@ -103,7 +126,8 @@ export function formatGoDuration(input: string, emptyLabel = "-"): string {
 }
 
 export function formatRelativeTime(input: string | null | undefined, emptyLabel = "-"): string {
-  const english = isEnglish();
+  const mode = getLocaleMode();
+  const english = mode === "en";
   if (!input) {
     return emptyLabel;
   }
@@ -130,6 +154,15 @@ export function formatRelativeTime(input: string | null | undefined, emptyLabel 
     if (hours > 0) return `${hours} hour${hours === 1 ? "" : "s"} ago`;
     if (minutes > 0) return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
     return "just now";
+  }
+
+  if (mode === "vi") {
+    if (years > 0) return `${years} năm trước`;
+    if (months > 0) return `${months} tháng trước`;
+    if (days > 0) return `${days} ngày trước`;
+    if (hours > 0) return `${hours} giờ trước`;
+    if (minutes > 0) return `${minutes} phút trước`;
+    return "vừa xong";
   }
 
   if (years > 0) return `${years} 年前`;

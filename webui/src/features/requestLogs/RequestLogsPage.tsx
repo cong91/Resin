@@ -13,7 +13,7 @@ import { Select } from "../../components/ui/Select";
 import { ToastContainer } from "../../components/ui/Toast";
 import { useToast } from "../../hooks/useToast";
 import { useI18n } from "../../i18n";
-import { getCurrentLocale, isEnglishLocale } from "../../i18n/locale";
+import { getCurrentLocale, isEnglishLocale, isVietnameseLocale } from "../../i18n/locale";
 import { formatBytes } from "../../lib/bytes";
 import { formatApiErrorMessage } from "../../lib/error-message";
 import { formatDateTime } from "../../lib/time";
@@ -285,7 +285,10 @@ function proxyTypeLabel(proxyType: number): string {
 }
 
 function dateLocale(): string {
-  return isEnglishLocale(getCurrentLocale()) ? "en-US" : "zh-CN";
+  const locale = getCurrentLocale();
+  if (isEnglishLocale(locale)) return "en-US";
+  if (isVietnameseLocale(locale)) return "vi-VN";
+  return "zh-CN";
 }
 
 

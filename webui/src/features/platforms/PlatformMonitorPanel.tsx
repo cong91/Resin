@@ -6,7 +6,7 @@ import { Badge } from "../../components/ui/Badge";
 import { Card } from "../../components/ui/Card";
 import { Select } from "../../components/ui/Select";
 import { useI18n } from "../../i18n";
-import { getCurrentLocale, isEnglishLocale } from "../../i18n/locale";
+import { getCurrentLocale, isEnglishLocale, isVietnameseLocale } from "../../i18n/locale";
 import { apiRequest } from "../../lib/api-client";
 import { formatApiErrorMessage } from "../../lib/error-message";
 import type {
@@ -99,7 +99,10 @@ function toString(raw: unknown): string {
 }
 
 function numberLocale(): string {
-  return isEnglishLocale(getCurrentLocale()) ? "en-US" : "zh-CN";
+  const locale = getCurrentLocale();
+  if (isEnglishLocale(locale)) return "en-US";
+  if (isVietnameseLocale(locale)) return "vi-VN";
+  return "zh-CN";
 }
 
 function formatCount(value: number): string {
